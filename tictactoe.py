@@ -1,16 +1,16 @@
-
 board = [
-        "-", "-", "-",
-        "-", "-", "-",
-        "-", "-", "-"
-    ]
+    "-", "-", "-",
+    "-", "-", "-",
+    "-", "-", "-"
+]
+
 def clearBoard(board):
     board = [
-        "-", "-", "-",
-        "-", "-", "-",
-        "-", "-", "-"
-    ]  
-      
+    "-", "-", "-",
+    "-", "-", "-",
+    "-", "-", "-"
+]
+
 def printBoard(board):
     print(board[0] + ' | ' + board[1] + ' | ' + board[2]) 
     print(board[3] + ' | ' + board[4] + ' | ' + board[5]) 
@@ -25,7 +25,7 @@ def inputX():
             print('Enter a digit from 1-9 only:')
         elif(1 <= int(inp) <= 9):
             if(board[int(inp)-1] == 'X' or board[int(inp)-1] == 'O'):
-                print('Current slot is occupied')
+                print('Slot is occupied')
             else:
                 print('Success')
                 run = False
@@ -38,7 +38,7 @@ def inputO():
     while(run):
         inp = input('Enter slot from 1-9 to input O:')
         if(not inp.isdigit()):
-            print('Enter a digit from 1-9 only')
+            print('Enter a digit from 1-9 only:')
         elif(1 <= int(inp) <= 9):
         
             if(board[int(inp)-1] == 'X' or board[int(inp)-1] == 'O'):
