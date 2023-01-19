@@ -10,7 +10,7 @@ def clearBoard(board):
     "-", "-", "-",
     "-", "-", "-"
 ]
-
+#S
 def printBoard(board):
     print(board[0] + ' | ' + board[1] + ' | ' + board[2]) 
     print(board[3] + ' | ' + board[4] + ' | ' + board[5]) 
@@ -25,7 +25,7 @@ def inputX():
             print('Enter a digit from 1-9 only:')
         elif(1 <= int(inp) <= 9):
             if(board[int(inp)-1] == 'X' or board[int(inp)-1] == 'O'):
-                print('Slot is occupied')
+                print('Current slot is occupied')
             else:
                 print('Success')
                 run = False
