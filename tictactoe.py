@@ -76,9 +76,6 @@ def main():
         print('O wins')
     elif(win() == 3):
         print('X wins')    
-        
-        
-    
                 
 if __name__ == "__main__":
     main()
