@@ -50,6 +50,16 @@ def inputO():
         else:
             print('Slot is not within 1-9')
 
+def checkAvailability():
+    for x in range(9): 
+        if(board[x] == '-'):
+            return False
+        
+    return True    #'X' != 'X ==  ()
+#def minimax(): board
+    #dini || 'seboard[]
+
+
 #8 ways to win
 def win():
     returnValue = 1
@@ -57,6 +67,8 @@ def win():
         returnValue = 2
     elif((board[0] == 'X' and board[1] == 'X' and board[2] == 'X') or (board[0] == 'X' and board[4] == 'X' and board[8] == 'X') or (board[3] == 'X' and board[4] == 'X' and board[5] == 'X') or (board[6] == 'X' and board[7] == 'X' and board[8] == 'X') or (board[0] == 'X' and board[3] == 'X' and board[6] == 'X') or (board[1] == 'X' and board[4] == 'X' and board[7] == 'X') or (board[2] == 'X' and board[5] == 'X' and board[8] == 'X') or (board[2] == 'X' and board[4] == 'X' and board[6] == 'X')):
         returnValue = 3
+    elif(checkAvailability()):
+        returnValue = 4     
     return returnValue    
         
 def main():
@@ -66,16 +78,19 @@ def main():
     while(run):
         inputX()
         printBoard(board)
-        if(win() == 3):
+        if(win() == 3 or win() == 4):
             break
         inputO()
         printBoard(board)
-        if(win() == 2):
+        if(win() == 2 or win() == 4):
             break
+        
     if(win() == 2):
         print('O wins')
     elif(win() == 3):
         print('X wins')    
+    elif(win() == 4):
+        print('Its a draw!')
                 
 if __name__ == "__main__":
     main()
