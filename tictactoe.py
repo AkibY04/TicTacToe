@@ -50,24 +50,48 @@ def inputO():
         else:
             print('Slot is not within 1-9')
 
-def checkAvailability():
-    for x in range(9): 
+def findEmptySpot(board):
+    emptySpots = []
+    for x in range(9):
         if(board[x] == '-'):
-            return False
+            emptySpots.append(x)
+    return emptySpots    
+
+def calcScore():
+    if(win(board) == 3): 
+        return -5
+    elif(win(board) == 2):
+        return 5
+    elif(win(board) == 4):
+        return 0
+    else:
+        return -1
+
+def minimax(board, player): #    C,[i]#if 0emptySpotIndexes[i]indexOfBoardmoves.append( emptySpotIndexes[i]) board[]=ForMovesForMoves ndexndexndexfspoinputO()ts2scor10moves;else: {score: -5} checkAvailability()availreturnreturn -1 -1ning
+    #if(calcScore() != -1):
         
-    return True    #'X' != 'X ==  ()
-#def minimax(): board
-    #dini || 'seboard[]
+    emptySpotIndexes = findEmptySpot(board)
+    score = []
+    moves = []
+    for i in emptySpotIndexes.length:
+        
+        if(player == aiPlayer):
+            board[emptySpotIndexes[i]] = 'O'
+            score.append(calcScore())
+            minimax(board, player)
+    return moves[]    
+    
+#def max(board) #avail
 
 
 #8 ways to win
-def win():
+def win(board):
     returnValue = 1
     if((board[0] == 'O' and board[1] == 'O' and board[2] == 'O') or (board[0] == 'O' and board[4] == 'O' and board[8] == 'O') or (board[3] == 'O' and board[4] == 'O' and board[5] == 'O') or (board[6] == 'O' and board[7] == 'O' and board[8] == 'O') or (board[0] == 'O' and board[3] == 'O' and board[6] == 'O') or (board[1] == 'O' and board[4] == 'O' and board[7] == 'O') or (board[2] == 'O' and board[5] == 'O' and board[8] == 'O') or (board[2] == 'O' and board[4] == 'O' and board[6] == 'O')):
         returnValue = 2
     elif((board[0] == 'X' and board[1] == 'X' and board[2] == 'X') or (board[0] == 'X' and board[4] == 'X' and board[8] == 'X') or (board[3] == 'X' and board[4] == 'X' and board[5] == 'X') or (board[6] == 'X' and board[7] == 'X' and board[8] == 'X') or (board[0] == 'X' and board[3] == 'X' and board[6] == 'X') or (board[1] == 'X' and board[4] == 'X' and board[7] == 'X') or (board[2] == 'X' and board[5] == 'X' and board[8] == 'X') or (board[2] == 'X' and board[4] == 'X' and board[6] == 'X')):
         returnValue = 3
-    elif(checkAvailability()):
+    elif(findEmptySpot(board).length == 0):
         returnValue = 4     
     return returnValue    
         
