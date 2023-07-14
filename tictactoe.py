@@ -28,9 +28,8 @@ def inputX():
             print('Enter a digit from 1-9 only:')
         elif(1 <= int(inp) <= 9):
             if(board[int(inp)-1] == 'X' or board[int(inp)-1] == 'O'):
-                print('Current slot is occupied')
+                print('\nCurrent slot is occupied\n')
             else:
-                print('Success')
                 run = False
                 board[int(inp)-1] = 'X'
         else:
@@ -45,9 +44,8 @@ def inputO():
         elif(1 <= int(inp) <= 9):
         
             if(board[int(inp)-1] == 'X' or board[int(inp)-1] == 'O'):
-                print('Current slot is occuppied')
+                print('\nCurrent slot is occuppied\n')
             else:
-                print('Success')
                 run = False
                 board[int(inp)-1] = 'O'
         else:
@@ -67,7 +65,7 @@ def inputAI():
                     bestScore = score
                     bestMoveIndex = x # I - 1 - 1 - 1 - 1 O 
         board[bestMoveIndex] = ai
-        print(bestMoveIndex)
+        ##print(bestMoveIndex)
     else:
         print(2)
         bestScore = 10000
@@ -81,7 +79,7 @@ def inputAI():
                     bestScore = score
                     bestMoveIndex = x
         board[bestMoveIndex] = ai
-        print(bestMoveIndex)
+        ##print(bestMoveIndex)
      ##[]scoreE  aiARD=sbcore print(score)0score ai =  player 0score = 0score = 0 in findEmptySpot(board)\xreturn bestMoveIndexbestMove - 1  - 1 - 1 - 1 - 1- 1 - 1 - 1Indexdmaximize()score == 0 in findEmptySpot(board) in findEmptySpot(board)
     
 def reverseMaximize():
@@ -205,70 +203,79 @@ def win():
 def main():
     clearBoard(board)
     printBoard(board)
-    inp = input("Player vs AI or Player vs Player")
-    if(inp == "1"):
-        inp2 = input("Do you want to be X or O?")
-        if(inp2 == "X"):
-            player = "X"
-            ai = 'O' #@""
-        elif(inp2 == "O"):
-            ai = "X"
-            player = "O"    
-            
-        else:
-            print("Enter X or O")
-        run = True
-        while(run):
-            if(player == "X"):
-                inputX()  
+
+    validGame = False
+    validLetter = False
+    
+    while(not validGame):
+        inp = input("\nPlayer vs AI [1] or Player vs Player [2]? ")
+        if(inp == "1"):
+            validGame = True
+
+            while(not validLetter):
+                inp2 = input("\nDo you want to be X or O? ")
+                if(inp2 == "X"):
+                    validLetter = True
+                    player = "X"
+                    ai = 'O' 
+                elif(inp2 == "O"):
+                    validLetter = True
+                    ai = "X"
+                    player = "O"    
+                else:
+                    print("Invalid input.")
+
+            run = True
+            while(run):
+                if(player == "X"):
+                    inputX()  
+                    printBoard(board)
+
+                    if(win() == 3 or win() == 4):
+                        break
+
+                    inputAI()
+                    printBoard(board)
+
+                    if(win() == 2 or win() == 4):
+                        break 
+                elif(player == "O"):
+                    inputAI()
+                    printBoard(board)
+
+                    if(win() == 3 or win() == 4):
+                        break
+
+                    inputO()
+                    printBoard(board)
+
+                    if(win() == 2 or win() == 4):
+                        break 
+        elif(inp == "2"):
+            validGame = True
+
+            run = True
+            while(run):
+                inputX()
                 printBoard(board)
+
                 if(win() == 3 or win() == 4):
-                  break
-                inputAI()
-                printBoard(board)
-                if(win() == 2 or win() == 4):
-                    break 
-                if(win() == 2):
-                    print('O wins')
-                elif(win() == 3):
-                    print('X wins')    
-                elif(win() == 4):
-                    print('Its a draw!')
-            elif(player == "O"):
-                inputAI()
-                printBoard(board)
-                if(win() == 3 or win() == 4):
-                  break
+                    break
+
                 inputO()
                 printBoard(board)
+
                 if(win() == 2 or win() == 4):
-                    break 
-                if(win() == 2):
-                    print('O wins')
-                elif(win() == 3):
-                    print('X wins')    
-                elif(win() == 4):
-                    print('Its a draw!')
-                
-                     #if(win())         
-    else:                
-        run = True
-        while(run):
-            inputX()
-            printBoard(board)
-            if(win() == 3 or win() == 4):
-                break
-            inputO()
-            printBoard(board)
-            if(win() == 2 or win() == 4):
-                break
+                    break
+        else: 
+            print("Invalid input.")
             
-        if(win() == 2):
-            print('O wins')
-        elif(win() == 3):
-            print('X wins')    
-        elif(win() == 4):
-            print('Its a draw!')
+    if(win() == 2):
+        print('O wins!')
+    elif(win() == 3):
+        print('X wins!')    
+    elif(win() == 4):
+        print('Its a draw!')
                 
 if __name__ == "__main__":
     main()
