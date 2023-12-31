@@ -166,13 +166,13 @@ scores = {
 def minimax(board, isMaximizing): #    C,[iif(player == "O" and winner = 2):
         #calcScore];; = player,
             #if(player == "X")= {}#if  && not 0emptySpotIndexes[i]indexOfBoardmoves.append( emptySpotIndexes[i]) board[]=ForMovesForMoves ndexndexndexfspoinputO()ts2scor10moves;else: {score: -5} checkAvailability()availreturnreturn -1 -1ning
-    #if(calcScore() != -1):9\ !== null 0bestScore = 0  cal == win(board)bboardoardboardint()type(score)score = 0sscalcScore()#
+    #if(calcScore() != -1):9\ !== null 0bestScore = 0  cal == win(board)bboardoardboardint()type(score)score = 0sscalcScore()#print(score)
     
     winner = calcScore()
     #
     if(winner != -1):
         score = calcScore()
-        print(score)
+        
         return score
     if(ai == "X"):        
         if(isMaximizing):
