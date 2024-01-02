@@ -4,8 +4,10 @@ board = [
     "-", "-", "-"
 ]
 
-player = "X"
-ai = "O" #= ""A###OX
+player = "O"
+ai = "X"
+ai2 = "X"
+player2 = "O" #= ""A###OXvarvar  
 
 def clearBoard(board):
     board = [
@@ -66,7 +68,7 @@ def inputAI():
                     bestMoveIndex = x # I - 1 - 1 - 1 - 1 O 
         board[bestMoveIndex] = ai
         ##print(bestMoveIndex)
-    else:
+    elif(ai == "O"):
         print(2)
         bestScore = 10000
         bestMoveIndex = 0
@@ -174,16 +176,16 @@ def minimax(board, isMaximizing): #    C,[iif(player == "O" and winner = 2):
         score = calcScore()
         
         return score
-    if(ai == "X"):        
+    if(ai == "X"):#works when player is O        
         if(isMaximizing):
-            bestScore = maximize()
+                bestScore = maximize()
         else: 
-            bestScore = minimize()
+                bestScore = minimize()
         return bestScore
-    else:
+    else:   #;###### 
         if(isMaximizing):
             bestScore = reverseMaximize()
-        else: #;    
+        else:     
             bestScore = reverseMinimize()
         return bestScore    
 
@@ -216,18 +218,26 @@ def main():
                 inp2 = input("\nDo you want to be X or O? ")
                 if(inp2 == "X"):
                     validLetter = True
+                    global player 
                     player = "X"
-                    ai = 'O' 
+                    global ai 
+                    ai = 'O'
+                    print(ai) 
                 elif(inp2 == "O"):
+                    print(ai)
                     validLetter = True
-                    ai = "X"
-                    player = "O"    
+                #    validLetter = True
+                #    global ai 
+                #    ai = "X"
+                #    global player 
+                #    player = "O"  
+                ##/*    print(ai)  
                 else:
                     print("Invalid input.")
 
             run = True
             while(run):
-                if(player == "X"):
+                if(player == "X" and ai == "O"):
                     inputX()  
                     printBoard(board)
 
@@ -239,7 +249,7 @@ def main():
 
                     if(win() == 2 or win() == 4):
                         break 
-                elif(player == "O"):
+                elif(player == "O" and ai == "X"):
                     inputAI()
                     printBoard(board)
 
