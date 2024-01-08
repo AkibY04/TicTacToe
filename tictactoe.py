@@ -1,3 +1,28 @@
+#Imports
+import pygame
+import os
+pygame.font.init()
+
+#Constants
+WIDTH, HEIGHT = 1152, 557
+
+#Setup
+pygame.init()
+WIN = pygame.display.set_mode((WIDTH,HEIGHT))
+pygame.display.set_caption("TicTacToe")
+FPS = 60
+
+#Images
+mainmenu = pygame.image.load(os.path.join('Assets', 'tictactoepng.png'))
+grid = pygame.image.load(os.path.join('Assets', 'tictactoegrid.png'))
+choose = pygame.image.load(os.path.join('Assets', 'tictactoechoose.png'))
+
+circle = pygame.image.load(os.path.join('Assets', 'transparentcircle.png'))
+circle = pygame.transform.scale(circle, (100,100))
+
+cross = pygame.image.load(os.path.join('Assets', 'transparentx.png'))
+cross = pygame.transform.scale(circle, (100,100))
+
 board = [
     "-", "-", "-",
     "-", "-", "-",
@@ -200,92 +225,144 @@ def win():
         returnValue = 3
     elif(len(findEmptySpot(board)) == 0):
         returnValue = 4     
-    return returnValue    
+    return returnValue   
+
+def draw_window(mainMenu, playerChoose, playingGame):
+    if mainMenu:
+        WIN.blit(mainmenu, (0,0))
+    elif playerChoose:
+        WIN.blit(choose, (0,0))
+    elif playingGame:
+        WIN.blit(grid, (0,0))
         
 def main():
-    clearBoard(board)
-    printBoard(board)
-
-    validGame = False
-    validLetter = False
+    run = True
+    playingGame = True
+    mainMenu = True
+    playerChoose = False
     
-    while(not validGame):
-        inp = input("\nPlayer 1 vs AI [1] or Player 1 vs Player 2 [2]? ")
-        if(inp == "1"):
-            validGame = True
+    while run:
+        WIN.fill((0,0,0))
+        draw_window(mainMenu, playerChoose, playingGame)
 
-            while(not validLetter):
-                inp2 = input("\nDo you want to be X or O Player 1? ")
-                if(inp2 == "X" or inp2 == "x"):
-                    validLetter = True
-                    global player 
-                    player = "X"
-                    global ai 
-                    ai = 'O'
-                    print(ai) 
-                elif(inp2 == "O" or inp2 == "o"):
-                    print(ai)
-                    validLetter = True
-                #    validLetter = True
-                #    global ai 
-                #    ai = "X"
-                #    global player 
-                #    player = "O"  
-                ##/*    print(ai)  
-                else:
-                    print("Invalid input.")
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
 
-            run = True
-            while(run):
-                if(player == "X" and ai == "O"):
-                    inputX()  
-                    printBoard(board)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]
+            print(x, y)
+            if mainMenu:
+                if(x > 482 and x < 643 and y > 184 and y < 235):
+                    print("First button")
+                    mainMenu = False
+                    playerChoose = True
+                
+                if(x > 482 and x < 643 and y > 258 and y < 311):
+                    print("Second button")
+                    mainMenu = False
+                    playerChoose = True
 
-                    if(win() == 3 or win() == 4):
-                        break
+            elif playerChoose:
+                if(x > 360 and x < 530 and y > 185 and y < 340):
+                    print("First button")
+                    playerChoose = False
+                    playingGame = True
+                
+                if(x > 598 and x < 783 and y > 185 and y < 340):
+                    print("Second button")
+                    playerChoose = False
+                    playingGame = True
+        
+        pygame.display.update()
 
-                    inputAI()
-                    printBoard(board)
+    pygame.quit()
+    
+    #Old code below
+    #=============================
+    # clearBoard(board)
+    # printBoard(board)
 
-                    if(win() == 2 or win() == 4):
-                        break 
-                elif(player == "O" and ai == "X"):
-                    inputAI()
-                    printBoard(board)
+    # validGame = False
+    # validLetter = False
+    
+    # while(not validGame):
+    #     inp = input("\nPlayer 1 vs AI [1] or Player 1 vs Player 2 [2]? ")
+    #     if(inp == "1"):
+    #         validGame = True
 
-                    if(win() == 3 or win() == 4):
-                        break
+    #         while(not validLetter):
+    #             inp2 = input("\nDo you want to be X or O Player 1? ")
+    #             if(inp2 == "X" or inp2 == "x"):
+    #                 validLetter = True
+    #                 global player 
+    #                 player = "X"
+    #                 global ai 
+    #                 ai = 'O'
+    #                 print(ai) 
+    #             elif(inp2 == "O" or inp2 == "o"):
+    #                 print(ai)
+    #                 validLetter = True
+    #             #    validLetter = True
+    #             #    global ai 
+    #             #    ai = "X"
+    #             #    global player 
+    #             #    player = "O"  
+    #             ##/*    print(ai)  
+    #             else:
+    #                 print("Invalid input.")
 
-                    inputO()
-                    printBoard(board)
+    #         run = True
+    #         while(run):
+    #             if(player == "X" and ai == "O"):
+    #                 inputX()  
+    #                 printBoard(board)
 
-                    if(win() == 2 or win() == 4):
-                        break 
-        elif(inp == "2"):
-            validGame = True
+    #                 if(win() == 3 or win() == 4):
+    #                     break
 
-            run = True
-            while(run):
-                inputX()
-                printBoard(board)
+    #                 inputAI()
+    #                 printBoard(board)
 
-                if(win() == 3 or win() == 4):
-                    break
+    #                 if(win() == 2 or win() == 4):
+    #                     break 
+    #             elif(player == "O" and ai == "X"):
+    #                 inputAI()
+    #                 printBoard(board)
 
-                inputO()
-                printBoard(board)
+    #                 if(win() == 3 or win() == 4):
+    #                     break
 
-                if(win() == 2 or win() == 4):
-                    break
-        else: 
-            print("Invalid input.")
+    #                 inputO()
+    #                 printBoard(board)
+
+    #                 if(win() == 2 or win() == 4):
+    #                     break 
+    #     elif(inp == "2"):
+    #         validGame = True
+
+    #         run = True
+    #         while(run):
+    #             inputX()
+    #             printBoard(board)
+
+    #             if(win() == 3 or win() == 4):
+    #                 break
+
+    #             inputO()
+    #             printBoard(board)
+
+    #             if(win() == 2 or win() == 4):
+    #                 break
+    #     else: 
+    #         print("Invalid input.")
             
-    if(win() == 2):
-        print('O wins!')
-    elif(win() == 3):
-        print('X wins!')    
-    elif(win() == 4):
-        print('Its a draw!')
+    # if(win() == 2):
+    #     print('O wins!')
+    # elif(win() == 3):
+    #     print('X wins!')    
+    # elif(win() == 4):
+    #     print('Its a draw!')
                 
 if __name__ == "__main__":
     main()
