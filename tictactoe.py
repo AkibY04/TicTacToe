@@ -210,20 +210,20 @@ def main():
     validLetter = False
     
     while(not validGame):
-        inp = input("\nPlayer vs AI [1] or Player vs Player [2]? ")
+        inp = input("\nPlayer 1 vs AI [1] or Player 1 vs Player 2 [2]? ")
         if(inp == "1"):
             validGame = True
 
             while(not validLetter):
-                inp2 = input("\nDo you want to be X or O? ")
-                if(inp2 == "X"):
+                inp2 = input("\nDo you want to be X or O Player 1? ")
+                if(inp2 == "X" or inp2 == "x"):
                     validLetter = True
                     global player 
                     player = "X"
                     global ai 
                     ai = 'O'
                     print(ai) 
-                elif(inp2 == "O"):
+                elif(inp2 == "O" or inp2 == "o"):
                     print(ai)
                     validLetter = True
                 #    validLetter = True
